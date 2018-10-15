@@ -1,17 +1,18 @@
 import scala.swing.FileChooser
 import java.io.File
 
+import scala.collection.mutable.ListBuffer
+
 object Main {
   def main(args: Array[String]): Unit = {
     try {
       var SquareList  = readFile(choosePlainFile("Выбор Файла").get.toString);
       println("Производится поиск ответа(сложность n!)")
-      if(TranspositionSolver.solve(SquareList, SquareList.length)) println("Задача решена") else println("Ответ не найден")
+      if(TranspositionSolver.solve(SquareList, SquareList.length)>0) println("Задача решена") else println("Ответ не найден")
     } catch {
       case ioe: ArrayIndexOutOfBoundsException => println("Файл должен содержать 12 строк по 4 числа, раздленные пробелами")
       case e: Exception => println("Ожидается текстовый файл на входе")
     }
-     println("end")
   }
 
 

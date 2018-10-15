@@ -32,17 +32,17 @@ object TranspositionSolver {
     squareList(second) = temp
   }
 
-  def solve(squareList: Array[Array[Int]], currentPosition: Int = 0): Boolean  = {
-    var existAns: Boolean = false
+  def solve(squareList: Array[Array[Int]], currentPosition: Int = 0): Int  = {
+    var existAns: Int = 0
     if (currentPosition == 1) {
       if (checkConditions(generateConditions(squareList))) {
-        existAns = true
         printList(squareList)
+        existAns = 1
       }
     }
     else {
       for(i <- 0 to currentPosition-1) {
-        existAns = existAns||solve(squareList, currentPosition - 1)
+        existAns = existAns+solve(squareList, currentPosition - 1)
         if (currentPosition % 2 == 1) changePosition(squareList, 0, currentPosition - 1)
         else changePosition(squareList, i, currentPosition - 1)
       }
@@ -61,5 +61,8 @@ object TranspositionSolver {
     println(generateConditions(squareList))
     println("-----------------")
   }
+
+
+
 
 }
